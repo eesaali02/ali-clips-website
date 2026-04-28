@@ -27,7 +27,7 @@ https.get(url, res => {
         }
 
         const reviews = (result.result.reviews || [])
-            .filter(r => r.rating === 5)
+            .filter(r => r.rating === 5 && r.text && r.text.trim())
             .map(r => ({
                 author:        r.author_name,
                 rating:        r.rating,
