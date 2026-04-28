@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Clips Studio — Barber in Mississauga</title>
+    <link rel="icon" type="image/png" href="logo.PNG" id="favicon">
+
+    <script>
+        window.tailwind = {
+            theme: {
+                extend: {
+                    colors: {
+                        'site-bg':     '#ffffff',
+                        'site-text':   '#22211f',
+                        'site-border': '#5f5f5a',
+                        'site-dark':   '#22211f',
+                        'site-sage':   '#d2d5ce',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: Supreme, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #22211f;
+            -webkit-font-smoothing: antialiased;
+            font-size: 1rem;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Nav */
+        #nav { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+        /* Mobile menu */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+        #mobile-menu.open { max-height: 480px; }
+
+        /* Hamburger animation */
+        #mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        #mobile-menu-btn.open span:nth-child(2) { opacity: 0; }
+        #mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        #mobile-menu-btn span { transition: transform 0.25s ease, opacity 0.25s ease; }
+
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding-bottom 0.3s ease;
+        }
+        .faq-item.open .faq-answer { max-height: 280px; padding-bottom: 24px; }
+        .faq-plus {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-size: 22px;
+            line-height: 1;
+            font-weight: 300;
+        }
+        .faq-item.open .faq-plus { transform: rotate(45deg); }
+
+        /* Table colors */
+        #services table { border-collapse: collapse; width: 100%; }
+        #services table th { color: #5f5f5a !important; font-weight: 400 !important; font-size: 10px !important; letter-spacing: 0.25em !important; text-transform: uppercase !important; padding: 14px 12px 14px 0; }
+        #services table th:last-child { text-align: right; padding-right: 0; }
+        #services table td { color: #22211f !important; font-size: 14px; padding: 16px 12px 16px 0; }
+        #services table td.dur { color: #5f5f5a !important; font-size: 12px !important; }
+        #services table td:last-child { text-align: right; padding-right: 0; }
+
+        /* Gallery carousel */
+        #gallery-track {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+        }
+        #gallery-track img { flex-shrink: 0; height: auto; display: block; }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ────────────────────────────────────────── -->
+<nav id="nav" class="fixed top-0 left-0 w-full z-50 bg-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-3 md:py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="flex-shrink-0">
+            <img src="logo.PNG" alt="Ali Clips Studio" class="h-10 md:h-14 object-contain" style="filter: brightness(0);">
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="hidden md:flex items-center gap-10 list-none">
+            <li><a href="#services" class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">Services</a></li>
+            <li><a href="#about"    class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">About</a></li>
+            <li><a href="#gallery"       class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">Gallery</a></li>
+            <li><a href="#testimonials" class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">Testimonials</a></li>
+            <li><a href="#faq"          class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">FAQ</a></li>
+            <li><a href="#contact"  class="text-[11px] tracking-[0.14em] uppercase text-[#22211f] hover:opacity-50 transition-opacity">Contact</a></li>
+        </ul>
+
+        <!-- Desktop Book Now + Mobile hamburger -->
+        <div class="flex items-center gap-4">
+            <a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+               target="_blank"
+               class="hidden md:inline-block bg-[#22211f] text-white text-[11px] tracking-[0.14em] uppercase px-6 py-3 hover:opacity-75 transition-opacity">
+                Book Now
+            </a>
+            <!-- Hamburger (mobile) -->
+            <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-[5px] p-2 -mr-2" aria-label="Toggle menu">
+                <span class="w-6 h-0.5 bg-[#22211f] block origin-center"></span>
+                <span class="w-6 h-0.5 bg-[#22211f] block"></span>
+                <span class="w-6 h-0.5 bg-[#22211f] block origin-center"></span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu" class="md:hidden border-t border-gray-100 bg-white overflow-hidden">
+        <div class="px-6 py-6 flex flex-col gap-5">
+            <a href="#services" class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">Services</a>
+            <a href="#about"    class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">About</a>
+            <a href="#gallery"       class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">Gallery</a>
+            <a href="#testimonials"  class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">Testimonials</a>
+            <a href="#faq"           class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">FAQ</a>
+            <a href="#contact"  class="mobile-nav-link text-[12px] tracking-[0.2em] uppercase text-[#22211f]">Contact</a>
+            <a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+               target="_blank"
+               class="mt-2 bg-[#22211f] text-white text-[12px] tracking-[0.14em] uppercase px-6 py-3 text-center">
+                Book Now
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────────── -->
+<section id="hero" class="bg-white pt-14 md:pt-16">
+    <div class="max-w-4xl mx-auto text-center px-6 pt-10 md:pt-16 pb-10 md:pb-12 reveal">
+        <p class="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-6 md:mb-8">
+            Mississauga, Ontario &nbsp;·&nbsp; Private Studio &nbsp;·&nbsp; Est.&nbsp;2023
+        </p>
+        <h1 class="text-[36px] sm:text-[48px] md:text-[72px] font-black uppercase leading-[1.05] md:leading-[1.01] tracking-[-0.01em] mb-6 md:mb-8">
+            Redefining Men's<br>Grooming in<br>Mississauga at<br>Ali Clips Studio
+        </h1>
+        <p class="text-[13px] md:text-[14px] text-[#5f5f5a] max-w-xs md:max-w-sm mx-auto mb-8 md:mb-10 leading-[1.75]">
+            A private one-chair studio operating by appointment.
+            Every booking is given the full scheduled time.
+        </p>
+        <a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+           target="_blank"
+           class="inline-block bg-[#22211f] text-white text-[11px] tracking-[0.14em] uppercase px-7 py-3 md:px-8 md:py-4 hover:opacity-75 transition-opacity">
+            Book Now &rarr;
+        </a>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 md:px-12 pb-12 md:pb-16 reveal">
+        <img src="Images/IMG_0202.JPG" alt="Ali Clips Studio" class="block mx-auto max-w-full">
+    </div>
+</section>
+
+<!-- ── YOUR BARBER ────────────────────────────────────────── -->
+<section id="about" class="bg-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-14 md:py-20">
+        <p class="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-8 md:mb-12 reveal">Your Barber</p>
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div class="reveal-left">
+                <img src="Images/Eesa.JPG" alt="Eesa Ali" class="w-full block">
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <p class="text-[13px] font-bold uppercase tracking-[0.05em]">Eesa Ali</p>
+                    <p class="text-[11px] tracking-[0.2em] uppercase text-[#5f5f5a] mt-0.5">Lead Barber</p>
+                </div>
+            </div>
+            <div class="reveal-right flex flex-col justify-start">
+                <h2 class="text-[28px] sm:text-[36px] md:text-[48px] font-black uppercase leading-[1.05] mb-6 md:mb-8">
+                    Precision<br>Cuts.<br>Personal<br>Attention.
+                </h2>
+                <p class="text-[13px] text-[#5f5f5a] leading-[1.8] mb-4">
+                    Ali Clips Studio is a private home-based barber studio in Mississauga,
+                    operating by appointment with a single chair.
+                </p>
+                <p class="text-[13px] text-[#5f5f5a] leading-[1.8]">
+                    Each appointment includes a brief consultation and the full
+                    scheduled time at the chair. No overlap, no rushing.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PRICING ────────────────────────────────────────────── -->
+<section id="services" class="bg-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-14 md:py-20">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div class="reveal-left">
+                <h2 class="text-[28px] sm:text-[36px] md:text-[52px] font-black uppercase leading-[1.04]">
+                    Transparent<br>Pricing,<br>Premium<br>Quality
+                </h2>
+            </div>
+            <div class="reveal-right">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-t border-b border-gray-200">
+                            <th class="py-3 pr-3 text-left font-normal" style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase;">Service</th>
+                            <th class="py-3 pr-3 text-left font-normal" style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase;">Duration</th>
+                            <th class="py-3 text-right font-normal" style="font-size:10px; letter-spacing:0.25em; text-transform:uppercase;">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 pr-3">Haircut</td>
+                            <td class="py-4 pr-3 dur">45 min</td>
+                            <td class="py-4 text-right">$30</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 pr-3">Haircut &amp; Beard</td>
+                            <td class="py-4 pr-3 dur">60 min</td>
+                            <td class="py-4 text-right">$40</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 pr-3">Beard Trim &amp; Lineup</td>
+                            <td class="py-4 pr-3 dur">30 min</td>
+                            <td class="py-4 text-right">$20</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-3">Connect &amp; Book</td>
+                            <td class="py-4 pr-3 dur">Online</td>
+                            <td class="py-4 text-right">Free</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-6 md:mt-8 flex justify-end">
+                    <a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+                       target="_blank"
+                       class="inline-block bg-[#22211f] text-white text-[11px] tracking-[0.14em] uppercase px-6 py-3 hover:opacity-75 transition-opacity">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── GALLERY CAROUSEL ───────────────────────────────────── -->
+<section id="gallery" class="bg-white py-14 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+        <div class="mb-8 md:mb-12 reveal">
+            <h2 class="text-[20px] md:text-[24px] tracking-[0.3em] uppercase font-bold">Gallery</h2>
+        </div>
+        <div class="overflow-hidden reveal" id="gallery-overflow">
+            <div id="gallery-track" class="flex gap-4">
+                <img src="Images/30932d496c9746d782cbb2cbbe07b9-ali-clips-inspiration-28d3037625794a04aa046134871afc-booksy.jpeg" alt="Ali Clips Haircut">
+                <img src="Images/1ca3aec2e42946969550a5553d13b1-ali-clips-inspiration-a96cf6b2c4494d7e8af9b47a879bd0-booksy.jpeg" alt="Ali Clips Haircut">
+                <img src="Images/6e8df8757baa44278953009e7f664a-ali-clips-inspiration-ed143fb6af6743c2986dc5898b6bcc-booksy.jpeg" alt="Ali Clips Haircut">
+                <img src="Images/d7ac45737c99419690c4606ddff33a-ali-clips-inspiration-6e0454cdf5fc4d62a2af54340ddb22-booksy.jpeg" alt="Ali Clips Haircut">
+                <img src="Images/050a231a331b46129d9878ad1df03f-ali-clips-inspiration-4bf4f3f1e9bf438792d80b013f04db-booksy.jpeg" alt="Ali Clips Haircut">
+                <img src="Images/IMG_0213.JPG" alt="Ali Clips Studio">
+            </div>
+        </div>
+        <div class="mt-5 relative flex items-center justify-center">
+            <div class="flex gap-2" id="gallery-dots"></div>
+            <div class="hidden md:flex items-center gap-3 absolute right-0">
+                <button id="gallery-prev" aria-label="Previous"
+                    class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-[#22211f] hover:border-[#22211f] hover:text-white transition-colors text-[#22211f]">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                </button>
+                <button id="gallery-next" aria-label="Next"
+                    class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-[#22211f] hover:border-[#22211f] hover:text-white transition-colors text-[#22211f]">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────────── -->
+<section id="testimonials" class="bg-white py-14 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+        <div class="mb-8 md:mb-12 reveal">
+            <h2 class="text-[20px] md:text-[24px] tracking-[0.3em] uppercase font-bold">Testimonials</h2>
+        </div>
+        <div class="overflow-hidden reveal" id="testimonial-overflow">
+            <div id="testimonial-track" class="flex gap-4" style="transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"Best barbershop experience I've had in Mississauga. Booked for the first time last month and already rescheduled three times. Eesa knows his craft."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Adam K.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">April 2025 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"The private setup is a big deal. No one waiting, no rushing — just a clean, focused cut from start to finish."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Jamal H.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">March 2025 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"Consistent quality every visit. Fade is always sharp, lines are always clean. Hard to find that level of reliability."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Daniel R.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">March 2025 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"Six months in and still my go-to. Booking through Booksy is easy and the cut is always worth it."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Ryan T.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">February 2025 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"Came in for a haircut and beard trim. Both done with care, results looked great. Will be back."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Mohammed S.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">January 2025 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+                <div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">
+                    <p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>
+                    <p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">"Worth booking in advance. The one-on-one time makes a real difference — attentive barber, clean results every time."</p>
+                    <div class="border-t border-[#d2d5ce] pt-4">
+                        <p class="text-[12px] font-bold uppercase tracking-[0.08em]">Carlos M.</p>
+                        <p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">December 2024 &nbsp;&middot;&nbsp; Booksy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 relative flex items-center justify-center">
+            <div class="flex gap-2" id="testimonial-dots"></div>
+            <div class="hidden md:flex items-center gap-3 absolute right-0">
+                <button id="testimonial-prev" aria-label="Previous review"
+                    class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-[#22211f] hover:border-[#22211f] hover:text-white transition-colors text-[#22211f]">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                </button>
+                <button id="testimonial-next" aria-label="Next review"
+                    class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:bg-[#22211f] hover:border-[#22211f] hover:text-white transition-colors text-[#22211f]">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────── -->
+<section id="faq" class="bg-[#22211f] text-white">
+    <div class="max-w-6xl mx-auto px-6 md:px-12 py-14 md:py-20">
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+            <!-- Left: heading + book now -->
+            <div class="reveal-left">
+                <h2 class="text-[26px] sm:text-[32px] md:text-[40px] font-black uppercase leading-tight mb-10">
+                    Questions?<br>We've Got<br>Answers.
+                </h2>
+                <a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+                   target="_blank"
+                   class="inline-block border border-white/40 text-white text-[11px] tracking-[0.14em] uppercase px-6 py-3 hover:bg-white hover:text-[#22211f] transition-colors">
+                    Book Now
+                </a>
+            </div>
+            <!-- Right: accordion -->
+            <div class="reveal-right">
+                <div class="faq-item border-t border-white/20">
+                    <button class="faq-btn w-full text-left flex justify-between items-center py-5 gap-4">
+                        <span class="text-[14px] md:text-[15px]">Where are you located?</span>
+                        <span class="faq-plus text-white/60 flex-shrink-0">+</span>
+                    </button>
+                    <p class="faq-answer text-[13px] text-white/55 leading-[1.8]">
+                        Ali Clips Studio is a private home studio at 844 Preston Manor Dr, Mississauga, ON L5V 2L6. Unit details are sent once a booking is confirmed.
+                    </p>
+                </div>
+                <div class="faq-item border-t border-white/20">
+                    <button class="faq-btn w-full text-left flex justify-between items-center py-5 gap-4">
+                        <span class="text-[14px] md:text-[15px]">How do I book an appointment?</span>
+                        <span class="faq-plus text-white/60 flex-shrink-0">+</span>
+                    </button>
+                    <p class="faq-answer text-[13px] text-white/55 leading-[1.8]">
+                        Bookings are made through Booksy. Any "Book Now" button on this page links to the live schedule.
+                    </p>
+                </div>
+                <div class="faq-item border-t border-white/20">
+                    <button class="faq-btn w-full text-left flex justify-between items-center py-5 gap-4">
+                        <span class="text-[14px] md:text-[15px]">What are your hours?</span>
+                        <span class="faq-plus text-white/60 flex-shrink-0">+</span>
+                    </button>
+                    <p class="faq-answer text-[13px] text-white/55 leading-[1.8]">
+                        Open Sunday, Monday, and Wednesday through Saturday, 10:00 AM – 7:00 PM. Closed Tuesdays.
+                    </p>
+                </div>
+                <div class="faq-item border-t border-white/20">
+                    <button class="faq-btn w-full text-left flex justify-between items-center py-5 gap-4">
+                        <span class="text-[14px] md:text-[15px]">Do you accept walk-ins?</span>
+                        <span class="faq-plus text-white/60 flex-shrink-0">+</span>
+                    </button>
+                    <p class="faq-answer text-[13px] text-white/55 leading-[1.8]">
+                        Appointments only. As a single-chair studio, walk-ins cannot be accommodated. Booking ahead on Booksy is required.
+                    </p>
+                </div>
+                <div class="faq-item border-t border-b border-white/20">
+                    <button class="faq-btn w-full text-left flex justify-between items-center py-5 gap-4">
+                        <span class="text-[14px] md:text-[15px]">What payment methods do you accept?</span>
+                        <span class="faq-plus text-white/60 flex-shrink-0">+</span>
+                    </button>
+                    <p class="faq-answer text-[13px] text-white/55 leading-[1.8]">
+                        Cash and e-transfer are accepted. Questions before an appointment can be sent by phone or Instagram DM.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────── -->
+<section id="contact" class="bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2">
+            <!-- Info column -->
+            <div class="px-6 md:px-12 py-12 md:py-16 border-r border-gray-200 reveal-left">
+                <h3 class="text-[36px] sm:text-[48px] md:text-[64px] font-black uppercase leading-[1.02] mb-10 md:mb-12">
+                    Contact<br>Us <span class="text-[#5f5f5a]">+</span>
+                </h3>
+                <div class="flex flex-col gap-8">
+                    <div>
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-3">Address</p>
+                        <p class="text-[14px] leading-[1.75]">844 Preston Manor Dr<br>Mississauga, ON L5V 2L6</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-3">Get in Touch</p>
+                        <p class="text-[14px] leading-[1.75]">
+                            <a href="tel:6476753254" class="hover:opacity-60 transition-opacity block">(647) 675-3254</a>
+                            <a href="https://www.instagram.com/aliclips_" target="_blank" class="hover:opacity-60 transition-opacity block">@aliclips_</a>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-3">Hours</p>
+                        <div class="text-[14px] leading-[2]">
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Sunday</span><span>10:00 AM – 7:00 PM</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Monday</span><span>10:00 AM – 7:00 PM</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs opacity-40"><span>Tuesday</span><span>Closed</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Wednesday</span><span>10:00 AM – 7:00 PM</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Thursday</span><span>10:00 AM – 7:00 PM</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Friday</span><span>10:00 AM – 7:00 PM</span></div>
+                            <div class="flex justify-between gap-4 max-w-xs"><span>Saturday</span><span>10:00 AM – 7:00 PM</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Image column — hidden on mobile to keep layout clean -->
+            <div class="hidden md:block reveal-right">
+                <img src="Images/IMG_0202.JPG" alt="Ali Clips Studio Interior" class="w-full h-full object-cover object-center" style="min-height: 520px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="bg-white border-t border-gray-200 py-10 md:py-12 text-center reveal">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+        <div class="mb-6 md:mb-8">
+            <img src="logo.PNG" alt="Ali Clips Studio" class="h-14 md:h-20 mx-auto object-contain" style="filter: brightness(0);">
+        </div>
+        <ul class="flex flex-wrap items-center justify-center gap-5 md:gap-8 mb-5 md:mb-6 list-none">
+            <li><a href="#services" class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">Services</a></li>
+            <li><a href="#about"    class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">About</a></li>
+            <li><a href="#gallery"       class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">Gallery</a></li>
+            <li><a href="#testimonials" class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">Testimonials</a></li>
+            <li><a href="#faq"          class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">FAQ</a></li>
+            <li><a href="#contact"  class="text-[10px] md:text-[11px] tracking-[0.14em] uppercase text-[#5f5f5a] hover:text-[#22211f] transition-colors">Contact</a></li>
+        </ul>
+        <p class="text-[11px] text-[#5f5f5a] tracking-[0.04em]">&copy; 2026 Ali Clips Studio</p>
+    </div>
+</footer>
+
+<!-- ── FLOATING BOOK NOW ───────────────────────────────────── -->
+<a href="https://booksy.com/en-ca/18911_ali-clips_barbershop_870806_mississauga#ba_s=seo"
+   target="_blank"
+   class="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 text-[#22211f] text-[11px] md:text-[13px] tracking-[0.14em] uppercase px-5 py-3 md:px-8 md:py-4 hover:opacity-75 transition-opacity shadow-lg"
+   style="background-color: #d0d0cc; transform: translateZ(0); -webkit-transform: translateZ(0);">
+
+    Book Now
+</a>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────── -->
+<script>
+    /* ── Black favicon ── */
+    (function () {
+        const img = new Image();
+        img.src = 'logo.PNG';
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width; canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            ctx.globalCompositeOperation = 'source-in';
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('favicon').href = canvas.toDataURL('image/png');
+        };
+    })();
+
+    /* ── Nav: hide on scroll down, show on scroll up ── */
+    const navEl = document.getElementById('nav');
+    let prevScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < prevScrollY) {
+            navEl.style.transform = 'translateY(0)';
+            navEl.style.boxShadow = y > 10 ? '0 1px 12px rgba(34,33,31,0.08)' : 'none';
+        } else if (y > prevScrollY && y > 80) {
+            navEl.style.transform = 'translateY(-100%)';
+        }
+        prevScrollY = y;
+    }, { passive: true });
+
+    /* ── Mobile menu toggle ── */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+        mobileBtn.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileBtn.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        });
+    });
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('visible', entry.isIntersecting);
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+
+    /* ── Gallery carousel ── */
+    const track = document.getElementById('gallery-track');
+    const galleryImgs = Array.from(track.querySelectorAll('img'));
+    const dotsContainer = document.getElementById('gallery-dots');
+    const total = galleryImgs.length;
+    let currentIdx = 0;
+    let maxIdx = total - 2;
+
+    function getVisibleCount() { return window.innerWidth < 768 ? 1 : 2; }
+
+    function buildDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i <= maxIdx; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'w-1.5 h-1.5 rounded-full transition-colors duration-300 ' + (i === currentIdx ? 'bg-[#22211f]' : 'bg-gray-300');
+            dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        dotsContainer.querySelectorAll('button').forEach((dot, i) => {
+            dot.className = 'w-1.5 h-1.5 rounded-full transition-colors duration-300 ' + (i === currentIdx ? 'bg-[#22211f]' : 'bg-gray-300');
+        });
+    }
+
+    function sizeImages() {
+        const visible = getVisibleCount();
+        maxIdx = total - visible;
+        const containerWidth = document.getElementById('gallery-overflow').offsetWidth;
+        const gap = (visible - 1) * 16;
+        const imgWidth = Math.floor((containerWidth - gap) / visible);
+        galleryImgs.forEach(img => { img.style.width = imgWidth + 'px'; });
+        buildDots();
+    }
+
+    function goTo(idx) {
+        currentIdx = Math.max(0, Math.min(idx, maxIdx));
+        const slideWidth = galleryImgs[0].offsetWidth + 16;
+        track.style.transform = 'translateX(-' + (currentIdx * slideWidth) + 'px)';
+        updateDots();
+    }
+
+    function startAutoplay() {
+        return setInterval(() => goTo(currentIdx >= maxIdx ? 0 : currentIdx + 1), 4000);
+    }
+    let autoplay = startAutoplay();
+
+    function resetAutoplay() {
+        clearInterval(autoplay);
+        autoplay = startAutoplay();
+    }
+
+    document.getElementById('gallery-prev').addEventListener('click', () => { goTo(currentIdx - 1); resetAutoplay(); });
+    document.getElementById('gallery-next').addEventListener('click', () => { goTo(currentIdx + 1); resetAutoplay(); });
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { goTo(diff > 0 ? currentIdx + 1 : currentIdx - 1); resetAutoplay(); }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => { sizeImages(); goTo(Math.min(currentIdx, maxIdx)); });
+    window.addEventListener('load', () => { sizeImages(); goTo(0); });
+    sizeImages();
+
+    /* ── Testimonials carousel ── */
+    (function () {
+        const tTrack = document.getElementById('testimonial-track');
+        const tCards = Array.from(tTrack.querySelectorAll('.testimonial-card'));
+        const tDots  = document.getElementById('testimonial-dots');
+        const tTotal = tCards.length;
+        let tIdx = 0, tMax;
+
+        function tVisible() { return window.innerWidth < 768 ? 1 : 2; }
+
+        function tBuildDots() {
+            tDots.innerHTML = '';
+            for (let i = 0; i <= tMax; i++) {
+                const d = document.createElement('button');
+                d.className = 'w-1.5 h-1.5 rounded-full transition-colors duration-300 ' + (i === tIdx ? 'bg-[#22211f]' : 'bg-gray-300');
+                d.setAttribute('aria-label', 'Go to review ' + (i + 1));
+                d.addEventListener('click', () => tGo(i));
+                tDots.appendChild(d);
+            }
+        }
+
+        function tUpdateDots() {
+            tDots.querySelectorAll('button').forEach((d, i) => {
+                d.className = 'w-1.5 h-1.5 rounded-full transition-colors duration-300 ' + (i === tIdx ? 'bg-[#22211f]' : 'bg-gray-300');
+            });
+        }
+
+        function tSize() {
+            const v    = tVisible();
+            tMax       = tTotal - v;
+            const w    = document.getElementById('testimonial-overflow').offsetWidth;
+            const cardW = Math.floor((w - (v - 1) * 16) / v);
+            tCards.forEach(c => { c.style.width = cardW + 'px'; });
+            tBuildDots();
+        }
+
+        function tGo(idx) {
+            tIdx = Math.max(0, Math.min(idx, tMax));
+            tTrack.style.transform = 'translateX(-' + (tIdx * (tCards[0].offsetWidth + 16)) + 'px)';
+            tUpdateDots();
+        }
+
+        let tTimer = setInterval(() => tGo(tIdx >= tMax ? 0 : tIdx + 1), 5000);
+        function tReset() { clearInterval(tTimer); tTimer = setInterval(() => tGo(tIdx >= tMax ? 0 : tIdx + 1), 5000); }
+
+        document.getElementById('testimonial-prev').addEventListener('click', () => { tGo(tIdx - 1); tReset(); });
+        document.getElementById('testimonial-next').addEventListener('click', () => { tGo(tIdx + 1); tReset(); });
+
+        let tTX = 0;
+        tTrack.addEventListener('touchstart', e => { tTX = e.touches[0].clientX; }, { passive: true });
+        tTrack.addEventListener('touchend', e => {
+            const diff = tTX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { tGo(diff > 0 ? tIdx + 1 : tIdx - 1); tReset(); }
+        }, { passive: true });
+
+        window.addEventListener('resize', () => { tSize(); tGo(Math.min(tIdx, tMax)); });
+        window.addEventListener('load', () => { tSize(); tGo(0); });
+        tSize();
+    })();
+</script>
+</body>
+</html>

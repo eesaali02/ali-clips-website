@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Screenshot output artifacts
+screenshot-*.png
+www.sotastudio.ca.png
+
+# Accidental files
+,
+
+# Claude Code tooling (not part of the site)
+.claude-flow/
+.claude/
