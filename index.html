@@ -197,8 +197,7 @@
 <!-- ── YOUR BARBER ────────────────────────────────────────── -->
 <section id="about" class="bg-white">
     <div class="max-w-6xl mx-auto px-6 md:px-12 py-14 md:py-20">
-        <p class="text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#5f5f5a] mb-8 md:mb-12 reveal">Your Barber</p>
-        <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+        <div class="grid grid-cols-[1fr_2fr] gap-4 md:gap-16 items-start">
             <div class="reveal-left">
                 <img src="Images/Eesa.JPG" alt="Eesa Ali" class="w-full block">
                 <div class="mt-4 pt-4 border-t border-gray-200">
@@ -256,6 +255,11 @@
                             <td class="py-4 pr-3">Beard Trim &amp; Lineup</td>
                             <td class="py-4 pr-3 dur">30 min</td>
                             <td class="py-4 text-right">$20</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 pr-3">Hair Design</td>
+                            <td class="py-4 pr-3 dur">10 min</td>
+                            <td class="py-4 text-right">from $5</td>
                         </tr>
                         <tr>
                             <td class="py-4 pr-3">Connect &amp; Book</td>
@@ -642,8 +646,11 @@
     document.getElementById('gallery-prev').addEventListener('click', () => { goTo(currentIdx - 1); resetAutoplay(); });
     document.getElementById('gallery-next').addEventListener('click', () => { goTo(currentIdx + 1); resetAutoplay(); });
 
-    let touchStartX = 0;
-    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    let touchStartX = 0, touchStartY = 0;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
+    track.addEventListener('touchmove', (e) => {
+        if (Math.abs(e.touches[0].clientX - touchStartX) > Math.abs(e.touches[0].clientY - touchStartY)) e.preventDefault();
+    }, { passive: false });
     track.addEventListener('touchend', (e) => {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) { goTo(diff > 0 ? currentIdx + 1 : currentIdx - 1); resetAutoplay(); }
