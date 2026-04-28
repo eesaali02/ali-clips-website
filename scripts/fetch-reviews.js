@@ -2,7 +2,7 @@ const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
-const PLACE_ID = 'PLACE_ID_HERE'; // Replace after finding your Place ID (see README)
+const PLACE_ID = 'ChIJu9mNovYyQCcRz-MsYFWthe4';
 const API_KEY  = process.env.GOOGLE_PLACES_API_KEY;
 
 if (!API_KEY) {
