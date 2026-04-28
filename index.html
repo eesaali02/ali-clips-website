@@ -36,7 +36,7 @@
 
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
         body {
             font-family: Supreme, Arial, sans-serif;
             background-color: #ffffff;
@@ -92,6 +92,7 @@
         #gallery-track {
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             align-items: center;
+            touch-action: pan-y;
         }
         #gallery-track img { flex-shrink: 0; height: auto; display: block; }
 
