@@ -654,12 +654,34 @@
     sizeImages();
 
     /* ── Testimonials carousel ── */
-    (function () {
+    (async function () {
         const tTrack = document.getElementById('testimonial-track');
-        const tCards = Array.from(tTrack.querySelectorAll('.testimonial-card'));
         const tDots  = document.getElementById('testimonial-dots');
-        const tTotal = tCards.length;
-        let tIdx = 0, tMax;
+        let tCards, tIdx = 0, tMax;
+
+        function esc(s) {
+            return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        try {
+            const res = await fetch('./reviews.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (data.reviews && data.reviews.length > 0) {
+                    tTrack.innerHTML = data.reviews.map(r =>
+                        '<div class="testimonial-card flex-shrink-0 bg-[#f5f5f3] p-6 md:p-8 flex flex-col">' +
+                        '<p class="text-[#22211f] text-[15px] tracking-[0.08em] mb-5">★★★★★</p>' +
+                        '<p class="text-[13px] md:text-[14px] text-[#22211f] leading-[1.8] flex-1 mb-6">&ldquo;' + esc(r.text) + '&rdquo;</p>' +
+                        '<div class="border-t border-[#d2d5ce] pt-4">' +
+                        '<p class="text-[12px] font-bold uppercase tracking-[0.08em]">' + esc(r.author) + '</p>' +
+                        '<p class="text-[11px] text-[#5f5f5a] mt-1 tracking-[0.04em]">' + esc(r.relative_time) + ' &nbsp;&middot;&nbsp; Google</p>' +
+                        '</div></div>'
+                    ).join('');
+                }
+            }
+        } catch (e) {}
+
+        tCards = Array.from(tTrack.querySelectorAll('.testimonial-card'));
 
         function tVisible() { return window.innerWidth < 768 ? 1 : 2; }
 
@@ -682,7 +704,7 @@
 
         function tSize() {
             const v    = tVisible();
-            tMax       = tTotal - v;
+            tMax       = tCards.length - v;
             const w    = document.getElementById('testimonial-overflow').offsetWidth;
             const cardW = Math.floor((w - (v - 1) * 16) / v);
             tCards.forEach(c => { c.style.width = cardW + 'px'; });
@@ -709,7 +731,6 @@
         }, { passive: true });
 
         window.addEventListener('resize', () => { tSize(); tGo(Math.min(tIdx, tMax)); });
-        window.addEventListener('load', () => { tSize(); tGo(0); });
         tSize();
     })();
 </script>
