@@ -36,7 +36,8 @@
 
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        section, footer { overflow-x: hidden; }
         body {
             font-family: Supreme, Arial, sans-serif;
             background-color: #ffffff;
@@ -647,11 +648,8 @@
     document.getElementById('gallery-prev').addEventListener('click', () => { goTo(currentIdx - 1); resetAutoplay(); });
     document.getElementById('gallery-next').addEventListener('click', () => { goTo(currentIdx + 1); resetAutoplay(); });
 
-    let touchStartX = 0, touchStartY = 0;
-    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, { passive: true });
-    track.addEventListener('touchmove', (e) => {
-        if (Math.abs(e.touches[0].clientX - touchStartX) > Math.abs(e.touches[0].clientY - touchStartY)) e.preventDefault();
-    }, { passive: false });
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', (e) => {
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) { goTo(diff > 0 ? currentIdx + 1 : currentIdx - 1); resetAutoplay(); }
