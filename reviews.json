@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-18T10:10:14.656Z",
+  "updated": "2026-05-19T09:50:51.519Z",
   "reviews": [
     {
       "author": "Sahil Panesar",
@@ -21,6 +21,13 @@
       "text": "Deadass come from Kingston to get my haircut here. So consistent every time 100% worth it.",
       "time": 1778030764,
       "relative_time": "a week ago"
+    },
+    {
+      "author": "Mohsin Khan",
+      "rating": 5,
+      "text": "The studio does not feel like a basement. Professional vibes, clean cuts and excellent service. The next big barber.",
+      "time": 1777407559,
+      "relative_time": "2 weeks ago"
     }
   ]
 }
