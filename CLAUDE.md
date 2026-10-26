@@ -49,12 +49,5 @@ A single-page barbershop website for **Ali Clips Studio** in Mississauga, Ontari
 - **Nav scroll**: compare `scrollY` to `prevScrollY`; add `transform: translateY(-100%)` when scrolling down.
 - **Favicon**: Canvas `globalCompositeOperation: 'source-in'` to recolor logo black for the browser tab.
 
-## Business Info (for content edits)
-- **Address**: 844 Preston Manor Dr, Mississauga, ON L5V 2L6
-- **Phone**: (647) 675-3254
-- **Hours**: Sun–Mon, Wed–Sat 10am–7pm | Tuesday: Closed
-- **Instagram**: @aliclips_
-- **Booksy**: linked in "Book Now" CTAs throughout
-
 ---
 
