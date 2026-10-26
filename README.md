@@ -1,7 +1,7 @@
 # Ali Clips Studio — Project Context
 
 ## What This Is
-A single-page barbershop website for **Ali Clips Studio** in Mississauga, Ontario. One HTML file, no build system, no npm, no frameworks.
+A single-page barbershop website for **Ali Clips Studio** in Mississauga, Ontario. One HTML file, no build system, no frameworks.
 
 ## The Only File That Matters
 - **`index.html`** — entire site lives here. Read it before editing anything.
